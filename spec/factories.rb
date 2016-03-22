@@ -5,7 +5,7 @@ FactoryGirl.define do
     github_id { generate(:github_id) }
     reviewed { false }
     closed { false }
-    user
+    users { build_list(:user, 2) }
   end
   
   factory :user do

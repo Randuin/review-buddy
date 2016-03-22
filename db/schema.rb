@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322022918) do
+ActiveRecord::Schema.define(version: 20160322040942) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20160322022918) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_pull_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "pull_request_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|

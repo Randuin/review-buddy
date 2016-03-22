@@ -16,10 +16,10 @@ PullRequestType = GraphQL::ObjectType.define do
     }
   end
 
-  field :user do
+  field :users do
     type UserType
     resolve -> (obj, _, _) {
-      obj.user 
+      obj.users 
     }
   end
 
