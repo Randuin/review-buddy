@@ -4,7 +4,10 @@ QueryType = GraphQL::ObjectType.define do
 
   # The Viewer class is just a wrapper/workaround to have 
   # fields with arguments on the query root.
-  field :viewer, ViewerType, -> (_, _, _) { nil }
+  field :viewer do
+    type ViewerType
+    resolve -> (_, _, _) { Class.new }
+  end
 
   field :pull_request, PullRequestType
 end

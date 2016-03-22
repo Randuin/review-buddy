@@ -6,6 +6,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def self.from_github(user_data)
+    # TODO: Do this properly :)
+    new(email: user_data[:email], password: '123')
+  end
+
   def reviews
     pull_requests.reject { |pr| pr.reviewed }
   end
