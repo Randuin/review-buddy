@@ -20,6 +20,5 @@ RSpec.describe UserType, :type => :model do
     it "resolves the pull requests not yet reviewed by user" do
       expect(resolved).to match(/person\d+@example\.com/)
     end
- 
   end
 end
