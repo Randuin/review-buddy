@@ -1,0 +1,7 @@
+language: ruby
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database review-buddy_test;' -U postgres
+script:
+    - RAILS_ENV=test bundle exec rake spec
