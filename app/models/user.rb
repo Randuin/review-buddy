@@ -21,13 +21,6 @@ class User < ApplicationRecord
     pull_requests.reject { |pr| pr.reviewed }
   end
 
-  def update_reviews_from_upstream_notifications 
-    notifications = client.notifications
-    reviews = ReviewNotificationExtractor.new(notifications).extract_reviews
-    self.pull_requests += reviews
-    save!
-  end
-
   private
 
   def client
