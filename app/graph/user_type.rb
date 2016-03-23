@@ -11,8 +11,6 @@ UserType = GraphQL::ObjectType.define do
 
   field :reviews do
     type -> { types[!PullRequestType] }
-    resolve -> (obj, args, ctx) {
-      obj.reviews 
-    }
+    resolve Resolvers::Reviews.new
   end
 end

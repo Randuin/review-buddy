@@ -18,7 +18,7 @@ RSpec.describe OauthController, type: :controller do
         .with('an_authorization_code')
         .and_return(access_token)
 
-      expect(github_api_client).to receive(:get_user)
+      expect(github_api_client).to receive(:user)
         .and_return({
           "id" => "abcd123",
           "email" => email,

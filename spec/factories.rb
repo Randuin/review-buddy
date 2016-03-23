@@ -11,6 +11,7 @@ FactoryGirl.define do
   factory :user do
     email { generate(:email) }
     password { 'password' }
+    github_access_token { 'an_access_token' }
     
     factory :user_with_prs do
       after(:build) do |user|

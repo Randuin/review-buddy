@@ -1,12 +1,22 @@
 class Github
   def initialize(access_token)
-    # here, token is a Oauth2::AccessToken
-    # used to make requests
-    @token = access_token
+    if access_token.is_a?(String)
+      @token = OAuth2::AccessToken.new(GithubOauthClient, access_token) 
+    else
+      @token = access_token
+    end
   end
 
-  def get_user
-    response = @token.get('/user').response
+  def get(url)
+    response = @token.get(url).response
     JSON.parse(response.body)
+  end
+
+  def notifications
+    get('/notifications?participating=true') 
+  end
+
+  def user
+    get('/user')
   end
 end

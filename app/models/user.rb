@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   has_many :user_pull_requests
   has_many :pull_requests, through: :user_pull_requests
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -14,11 +13,24 @@ class User < ApplicationRecord
     end
   end
 
+  def update_auth_token
+    assign_attributes(auth_token: "#{self.id}:#{Devise.friendly_token}")
+  end
+
   def reviews
     pull_requests.reject { |pr| pr.reviewed }
   end
 
-  def update_auth_token
-    assign_attributes(auth_token: "#{self.id}:#{Devise.friendly_token}")
+  def update_reviews_from_upstream_notifications 
+    notifications = client.notifications
+    reviews = ReviewNotificationExtractor.new(notifications).extract_reviews
+    self.pull_requests += reviews
+    save!
+  end
+
+  private
+
+  def client
+    @client ||= Github.new(github_access_token)
   end
 end
