@@ -11,15 +11,15 @@ default: &default
 
 development:
   <<: *default
-  database: review-buddy_development
+  database: reviewbuddy_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: review-buddy_test
+  database: reviewbuddy_test
 
 production:
   <<: *default
-  database: review-buddy_production
+  database: reviewbuddy_production
