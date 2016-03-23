@@ -6,9 +6,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def self.from_github(user_data)
-    # TODO: Do this properly :)
-    new(email: user_data[:email], password: '123')
+  def self.from_github(access_token, user_data)
+    first_or_create!(github_uid: user_data["id"]) do |user|
+      user.email = user_data["email"] 
+      user.password = Devise.friendly_token.first(8)
+      user.github_access_token = access_token
+    end
   end
 
   def reviews

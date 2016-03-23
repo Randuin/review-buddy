@@ -42,10 +42,12 @@ ActiveRecord::Schema.define(version: 20160322213941) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "avatar_url"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "auth_token"
     t.string   "github_access_token"
+    t.string   "github_uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
