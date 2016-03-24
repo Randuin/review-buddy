@@ -191,6 +191,7 @@ DEPENDENCIES
   devise!
   factory_girl
   factory_girl_rails
+  faraday
   graphql
   graphql-relay
   listen (~> 3.0.5)

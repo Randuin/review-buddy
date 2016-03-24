@@ -1,4 +1,6 @@
 class Github
+  attr_accessor :token
+
   def initialize(access_token)
     if access_token.is_a?(String)
       @token = OAuth2::AccessToken.new(GithubOauthClient, access_token) 

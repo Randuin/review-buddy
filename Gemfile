@@ -8,6 +8,7 @@ gem 'oauth2'
 gem 'devise', github: 'plataformatec/devise', branch: 'master'
 gem 'graphql'
 gem 'graphql-relay'
+gem 'faraday'
 
 group :development, :test do
   gem 'pry'
