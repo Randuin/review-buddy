@@ -11,6 +11,7 @@ gem 'graphql-relay'
 gem 'faraday'
 
 group :development, :test do
+  gem "codeclimate-test-reporter", require: nil
   gem 'pry'
   gem 'rspec-rails'
   gem 'factory_girl'
