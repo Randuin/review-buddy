@@ -8,7 +8,7 @@ class ReviewDetector
 
     def user
       gh_user = GithubPublic.new.user(@username)
-      require 'pry'
+      return unless gh_user
       User.find_by(github_uid: gh_user["id"])
     end
   end

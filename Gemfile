@@ -13,7 +13,7 @@ gem 'faraday'
 group :development, :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'pry'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.5.0.beta2'
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
