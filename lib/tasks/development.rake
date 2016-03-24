@@ -8,6 +8,4 @@ task :create_webhook do
       events: ['commit_comment'],
     })
   )
-  require 'pry'
-  binding.pry
 end

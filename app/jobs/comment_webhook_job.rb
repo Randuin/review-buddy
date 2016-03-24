@@ -3,8 +3,6 @@ class CommentWebhookJob < ApplicationJob
 
   def perform(params)
     comment = params["comment"]
-    repo = params["repository"]
-    sender = params["sender"]
     pr = params["issue"]
 
     new_pr = PullRequest.new(

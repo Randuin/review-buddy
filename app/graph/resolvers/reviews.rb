@@ -1,6 +1,6 @@
 module Resolvers
   class Reviews
-    def call(user, args, ctx)
+    def call(user, _, _)
       user.reviews
     end
   end
