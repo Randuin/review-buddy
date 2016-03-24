@@ -28,8 +28,7 @@ class ReviewDetector
   private
 
   def is_review_ping?
-    # TODO: This is super dumb right now. Make it more intelligent
-    @params["body"].include?("please review")
+    CommentIntent.from(@params["body"]).review?
   end
 
   def mentions
