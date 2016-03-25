@@ -28,7 +28,7 @@ class ReviewDetector
   private
 
   def is_review_ping?
-    CommentIntent.from(@params["body"]).review?
+    CommentIntent.new(@params["body"]).review?
   end
 
   def mentions

@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.intent_service_url = 'http://localhost:5000'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
