@@ -6,11 +6,11 @@ RSpec.describe GithubPublic, :type => :model do
     context "when API returns 200" do
       before do
         stub_request(:get, /api.github.com/)
-          .to_return(status: 200, body: {id: 1}.to_json)  
+          .to_return(status: 200, body: { id: 1 }.to_json)  
       end
 
       it "returns the payload" do
-        expect(GithubPublic.new.user("yoloswager")).to eq({"id" => 1})
+        expect(GithubPublic.new.user("yoloswager")).to eq({ "id" => 1 })
       end
     end
 

@@ -7,7 +7,7 @@ RSpec.describe Github, :type => :model do
 
     it "gets /user" do
       expect(token).to receive(:get).with('/user') { 
-        double(response: double(body: {user: 1}.to_json)) 
+        double(response: double(body: { user: 1 }.to_json)) 
       }
 
       Github.new(token).user
