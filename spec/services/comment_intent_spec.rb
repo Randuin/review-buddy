@@ -5,7 +5,6 @@ RSpec.describe CommentIntent, :type => :model do
     context "when intent service detects review intent" do
       before do
         stub_request(:get, /localhost:5000/)
-          .with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'})
           .to_return(status: 200, body: {intent: 'review'}.to_json)  
       end
 
@@ -18,7 +17,6 @@ RSpec.describe CommentIntent, :type => :model do
     context "when intent service something else than a review" do
       before do
         stub_request(:get, /localhost:5000/)
-          .with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'})
           .to_return(status: 200, body: {intent: 'comment'}.to_json)  
       end
 

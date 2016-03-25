@@ -19,6 +19,9 @@ RSpec.describe CommentWebhookJob, :type => :job do
       }
 
       before do
+        stub_request(:get, /localhost:5000/)
+          .to_return(status: 200, body: {intent: 'review'}.to_json)  
+
         github_public_client = instance_double("GithubPublic")
         allow(GithubPublic).to receive(:new) { github_public_client }
 
@@ -49,6 +52,9 @@ RSpec.describe CommentWebhookJob, :type => :job do
       }
 
       before do
+        stub_request(:get, /localhost:5000/)
+          .to_return(status: 200, body: {intent: 'review'}.to_json)  
+
         github_public_client = instance_double("GithubPublic")
         allow(GithubPublic).to receive(:new) { github_public_client }
         expect(github_public_client).to receive(:user)

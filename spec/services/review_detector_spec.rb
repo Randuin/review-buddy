@@ -4,9 +4,13 @@ RSpec.describe ReviewDetector, :type => :model do
   describe "#infer_reviewers" do
     let(:subject) { 
       ReviewDetector.new(comment_params) 
-    }
+    } 
 
     context "when body is a review ping" do
+      before do
+        stub_request(:get, /localhost:5000/)
+          .to_return(status: 200, body: {intent: 'review'}.to_json)  
+      end
 
       context "when comment body contains mentions" do
         let(:comment_params) do
@@ -46,6 +50,11 @@ RSpec.describe ReviewDetector, :type => :model do
     end
 
     context "when comment body is a regular comment" do
+      before do
+        stub_request(:get, /localhost:5000/)
+          .to_return(status: 200, body: {intent: 'comment'}.to_json)  
+      end
+
       let(:comment_params) do
         {
           "body" => "@xuorig what do you think?"
