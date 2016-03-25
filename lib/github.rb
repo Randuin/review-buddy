@@ -9,16 +9,14 @@ class Github
     end
   end
 
+  def user
+    get('/user')
+  end
+  
+  private
+
   def get(url)
     response = @token.get(url).response
     JSON.parse(response.body)
-  end
-
-  def notifications
-    get('/notifications?participating=true') 
-  end
-
-  def user
-    get('/user')
   end
 end
