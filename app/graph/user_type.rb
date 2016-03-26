@@ -1,6 +1,8 @@
-UserType = GraphQL::ObjectType.define do
+UserType = Graph::ActiveRecordObjectType.define do
   name "User"
   description "A Review Buddy User"
+  interfaces [Graph::Relay::Node]
+  model User
 
   field :email do
     type !types.String 

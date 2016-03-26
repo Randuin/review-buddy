@@ -1,6 +1,7 @@
-PullRequestType = GraphQL::ObjectType.define do
+PullRequestType = Graph::ActiveRecordObjectType.define do
   name "PullRequest"
   description "A Github pull request"
+  model PullRequest
 
   field :github_id do
     type types.Int
