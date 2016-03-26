@@ -17,6 +17,9 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+end
+
+group :test do
   gem 'webmock'
 end
 

@@ -20,8 +20,8 @@ class ReviewDetector
   end
 
   def infer_reviewers
-    return [] unless is_review_ping?
     return [] unless mentions.present?
+    return [] unless is_review_ping?
     mentions.map(&:user).compact
   end
 

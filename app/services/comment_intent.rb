@@ -9,11 +9,12 @@ class CommentIntent
   end
 
   def intent
-    @response ||= begin
-      response = @conn.get("/intent") { |req| req.params["comment"] = @body }
-      return nil unless response.status == 200
-      JSON.parse(response.body)["intent"]
-    end
+    @response ||= 
+      begin
+        response = @conn.get("/intent") { |req| req.params["comment"] = @body }
+        return nil unless response.status == 200
+        JSON.parse(response.body)["intent"]
+      end
   end
 
   def review?
