@@ -4,12 +4,7 @@ UserType = Graph::ActiveRecordObjectType.define do
   interfaces [Graph::Relay::Node]
   model User
 
-  field :email do
-    type !types.String 
-    resolve -> (obj, _, _) {
-      obj.email
-    }
-  end
+  field :email, !types.String, property: :email
 
   field :reviews do
     type -> { types[!PullRequestType] }

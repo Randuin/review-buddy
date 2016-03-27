@@ -1,48 +1,14 @@
 PullRequestType = Graph::ActiveRecordObjectType.define do
   name "PullRequest"
   description "A Github pull request"
+  interfaces [Graph::Relay::Node]
   model PullRequest
 
-  field :github_id do
-    type types.Int
-    resolve -> (obj, _, _) {
-      obj.github_id 
-    }
-  end
-
-  field :title do
-    type types.String
-    resolve -> (obj, _, _) {
-      obj.title 
-    }
-  end
-
-  field :users do
-    type UserType
-    resolve -> (obj, _, _) {
-      obj.users 
-    }
-  end
-
-  field :url do
-    type types.String
-    resolve -> (obj, _, _) {
-      obj.url 
-    }
-  end
-
-  field :reviewed do
-    type types.Boolean
-    resolve -> (obj, _, _) {
-      obj.reviewed 
-    }
-  end
-
-  field :closed do
-    type types.Boolean
-    resolve -> (obj, _, _) {
-      obj.closed 
-    }
-  end
+  field :github_id, types.Int, property: :github_id
+  field :title, types.String, property: :title
+  field :users, UserType, property: :users
+  field :url, types.String, property: :url
+  field :reviewed, types.Boolean, property: :reviewed
+  field :closed, types.Boolean, property: :closed
 end
 
