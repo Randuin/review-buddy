@@ -20,6 +20,11 @@ module Graph
             field :pageInfo, Graph::Relay::PageInfo.type, property: :page_info
           end
         end
+
+        def field(name, type, max_page_size: 100)
+          GraphQL::Field.define do 
+          end
+        end
       end
 
       def edges
