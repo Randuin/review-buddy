@@ -1,5 +1,5 @@
 MutationRoot = GraphQL::ObjectType.define do
   name "Mutation"
 
-  field :markPullRequestAsReviewed, MarkPullRequestAsReviewed.field 
+  field :markPullRequestAsReviewed, field: Mutations::MarkPullRequestAsReviewed.field 
 end

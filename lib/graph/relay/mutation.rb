@@ -12,7 +12,7 @@ module Graph
           @field ||= begin
             field_return_type = return_type
             field_input_type = input_type
-            field_resolve_proc = lambda do |obj, args, ctx|
+            field_resolve = lambda do |obj, args, ctx|
               result = @resolve.call(obj, args[:input], ctx)
               result[:clientMutationId] = args[:input][:clientMutationId]
               Result.new(result)
@@ -27,7 +27,7 @@ module Graph
         end
 
         def input(name, type, description: nil, default_value: nil)
-          input_type.arguments[name] = GraphQL::Argument.define do
+          input_type.arguments[name.to_s] = GraphQL::Argument.define do
             name(name)
             type(type)
             description(description)
@@ -36,7 +36,7 @@ module Graph
         end
 
         def returns(name, type, description: nil)
-          return_type.fields[name] = GraphQL::Field.define do
+          return_type.fields[name.to_s] = GraphQL::Field.define do
             name(name)
             type(type)
             description(description)
@@ -72,8 +72,8 @@ module Graph
         end
 
         def method_missing(name, *args, &block)
-          if results.key(name)
-            results[name]
+          if @results.key?(name)
+            @results[name]
           else
             super
           end

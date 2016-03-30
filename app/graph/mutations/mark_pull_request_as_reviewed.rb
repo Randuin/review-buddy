@@ -1,14 +1,13 @@
 module Mutations
   class MarkPullRequestAsReviewed < Graph::Relay::Mutation
     input :pullRequestId, GraphQL::STRING_TYPE
-
-    returns :id, GraphQL::STRING_TYPE
-    returns :reviewed, GraphQL::BOOLEAN_TYPE
+    returns :pullRequest, PullRequestType
 
     self.resolve = -> (obj, args, ctx) {
-      obj.reviewed = true 
-      obj.save!
-      obj
+      pr = PullRequest.find(args["pullRequestId"])
+      pr.reviewed = true 
+      pr.save!
+      { pullRequest: pr }
     }
   end
 end
