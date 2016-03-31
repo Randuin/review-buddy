@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322213941) do
+ActiveRecord::Schema.define(version: 20160331120406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(version: 20160322213941) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "repo_collaborations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "repo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "repo_collaborations", ["repo_id"], name: "index_repo_collaborations_on_repo_id", using: :btree
+  add_index "repo_collaborations", ["user_id"], name: "index_repo_collaborations_on_user_id", using: :btree
+
+  create_table "repos", force: :cascade do |t|
+    t.integer  "github_id"
+    t.string   "url"
+    t.string   "name"
+    t.string   "webhook_url"
+    t.string   "webhook_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "user_pull_requests", force: :cascade do |t|
@@ -51,9 +71,12 @@ ActiveRecord::Schema.define(version: 20160322213941) do
     t.string   "auth_token"
     t.string   "github_access_token"
     t.string   "github_uid"
+    t.string   "github_username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "repo_collaborations", "repos"
+  add_foreign_key "repo_collaborations", "users"
 end

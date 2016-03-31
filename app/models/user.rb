@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :user_pull_requests
   has_many :pull_requests, through: :user_pull_requests
+  has_many :repo_collaborations
+  has_many :repos, through: :repo_collaborations
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

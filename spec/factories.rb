@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :repo do
+    github_id 1
+    url "MyString"
+  end
+
   factory :pull_request do
     title { generate(:title) }
     url { generate(:url) }
@@ -10,6 +15,7 @@ FactoryGirl.define do
   
   factory :user do
     email { generate(:email) }
+    github_username { 'xuorig' }
     password { 'password' }
     github_access_token { 'an_access_token' }
     
@@ -20,7 +26,6 @@ FactoryGirl.define do
       end
     end
   end
- 
 
   sequence(:email) { |n| "person#{n}@example.com" }
   sequence(:title) { |n| "Title #{n}" }

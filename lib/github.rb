@@ -24,8 +24,7 @@ class Github
   private
 
   def post(url, body = {})
-    response = @token.post(url, body: JSON.dump(body))
-    JSON.parse(response.body)
+    @token.post(url, body: JSON.dump(body))
   end
 
   def get(url)
