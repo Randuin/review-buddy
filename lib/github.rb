@@ -12,8 +12,21 @@ class Github
   def user
     get('/user')
   end
+
+  def setup_webhook(repoName)
+    post("/repos/xuorig/#{repoName}/hooks", 
+      name: 'web',       
+      config: { url: Rails.application.config.webhook_url, content_type: 'json'}, 
+      events: ['commit_comment'], 
+    )
+  end
   
   private
+
+  def post(url, body = {})
+    response = @token.post(url, body: JSON.dump(body))
+    JSON.parse(response.body)
+  end
 
   def get(url)
     response = @token.get(url).response

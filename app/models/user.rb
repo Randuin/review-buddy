@@ -18,10 +18,8 @@ class User < ApplicationRecord
   end
 
   def reviews
-    pull_requests.reject { |pr| pr.reviewed }
+    pull_requests.reject { |pr| pr.reviewed || pr.closed }
   end
-
-  private
 
   def client
     @client ||= Github.new(github_access_token)

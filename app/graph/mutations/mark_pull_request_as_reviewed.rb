@@ -5,8 +5,7 @@ module Mutations
 
     self.resolve = -> (obj, args, ctx) {
       pr = PullRequest.find(args["pullRequestId"])
-      pr.reviewed = true 
-      pr.save!
+      pr.update!(reviewed: true)
       { pullRequest: pr }
     }
   end

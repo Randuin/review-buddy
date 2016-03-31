@@ -32,7 +32,7 @@ RSpec.describe CommentWebhookJob, :type => :job do
 
       it "adds a pull request to the reviewers" do
         expect do
-          described_class.new.perform(params)
+          described_class.new.perform(params["issue"], params["comment"])
         end.to change { user.reload.pull_requests.count }.by(1)
       end 
     end
@@ -65,7 +65,7 @@ RSpec.describe CommentWebhookJob, :type => :job do
       it "does not add any pr to the user" do
         count = user.pull_requests.count
         expect do
-          described_class.new.perform(params)
+          described_class.new.perform(params["issue"], params["comment"])
         end.not_to change { user.reload.pull_requests.count }.from(count)
       end 
     end
