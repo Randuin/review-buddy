@@ -8,6 +8,10 @@ module Graph
           @type_name ||= name.split('::').last 
         end
 
+        def resolve_with(callable)
+          self.resolve = callable
+        end
+
         def field
           @field ||= begin
             field_return_type = return_type
