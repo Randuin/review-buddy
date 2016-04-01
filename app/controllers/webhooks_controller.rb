@@ -4,7 +4,6 @@ class WebhooksController < ApplicationController
     head :ok
   end
 
-
   def pr_params
     params.require(:issue).permit(:id, :title, :url)
   end

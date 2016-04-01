@@ -11,6 +11,9 @@ class CommentWebhookJob < ApplicationJob
     )
 
     reviewers = ReviewDetector.new(comment_params).infer_reviewers
+
+    Rails.logger.info "Could not infer any reviewers for comment: #{comment_params["body"]}" if reviewers.blank?
+
     reviewers.each do |reviewer|
       reviewer.pull_requests << new_pr
     end
