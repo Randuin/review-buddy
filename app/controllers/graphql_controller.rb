@@ -12,4 +12,12 @@ class GraphqlController < ApplicationController
     )
     render json: result
   end
+
+  def introspection
+    result = Schema.execute(
+      GraphQL::Introspection::INTROSPECTION_QUERY,
+      debug:true
+    )
+    render json: result
+  end
 end

@@ -32,7 +32,7 @@ module Graph
 
         def input(name, type, description: nil, default_value: nil)
           input_type.arguments[name.to_s] = GraphQL::Argument.define do
-            name(name)
+            name(name.to_s)
             type(type)
             description(description)
             default_value(default_value)
@@ -41,7 +41,7 @@ module Graph
 
         def returns(name, type, description: nil)
           return_type.fields[name.to_s] = GraphQL::Field.define do
-            name(name)
+            name(name.to_s)
             type(type)
             description(description)
           end

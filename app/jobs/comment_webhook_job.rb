@@ -7,7 +7,7 @@ class CommentWebhookJob < ApplicationJob
       reviewed: false,
       github_id: pr_params["id"],
       title: pr_params["title"],
-      url: pr_params["url"]
+      url: pr_params["html_url"]
     )
 
     reviewers = ReviewDetector.new(comment_params).infer_reviewers

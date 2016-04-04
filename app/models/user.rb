@@ -8,11 +8,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   def self.from_github(access_token, user_data)
-    first_or_create!(github_uid: user_data["id"]) do |user|
+    user = User.find_or_initialize_by(github_uid: user_data["id"]) do |user|
       user.email = user_data["email"] 
       user.password = Devise.friendly_token.first(8)
       user.github_access_token = access_token
     end
+
+    user.save!
+    user
   end
 
   def update_auth_token
