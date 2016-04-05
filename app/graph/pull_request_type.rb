@@ -4,7 +4,6 @@ PullRequestType = Graph::ActiveRecordObjectType.define do
   interfaces [Graph::Relay::Node]
   model PullRequest
 
-  field :github_id, types.Int, property: :github_id
   field :title, types.String, property: :title
   field :users, UserType, property: :users
   field :url, types.String, property: :url

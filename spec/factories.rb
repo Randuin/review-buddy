@@ -7,7 +7,10 @@ FactoryGirl.define do
   factory :pull_request do
     title { generate(:title) }
     url { generate(:url) }
-    github_id { generate(:github_id) }
+    repo { generate(:repo) }
+    owner { generate(:owner) }
+    number { generate(:github_id) }
+    merged { false }
     reviewed { false }
     closed { false }
     users { build_list(:user, 2) }
@@ -31,4 +34,6 @@ FactoryGirl.define do
   sequence(:title) { |n| "Title #{n}" }
   sequence(:url) { |n| "http://github.com/xuorig/review-buddy/#{n}" }
   sequence(:github_id) { |n| n }
+  sequence(:repo) { |n| "repo#{n}" }
+  sequence(:owner) { |n| n }
 end

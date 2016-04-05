@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331120406) do
+ActiveRecord::Schema.define(version: 20160404220310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,14 @@ ActiveRecord::Schema.define(version: 20160331120406) do
     t.integer  "user_id"
     t.boolean  "closed"
     t.boolean  "reviewed"
-    t.integer  "github_id"
     t.string   "title"
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "merged"
+    t.string   "repo"
+    t.string   "owner"
+    t.string   "number"
   end
 
   create_table "repo_collaborations", force: :cascade do |t|

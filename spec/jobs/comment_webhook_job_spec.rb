@@ -8,9 +8,15 @@ RSpec.describe CommentWebhookJob, :type => :job do
       let(:params) {
         {
           "issue" => {
-            "id" => "123",
+            "number" => 123,
             "title" => "Great PR",
-            "url" => "http://github.com/xuorig/something/pr",
+            "html_url" => "http://github.com/xuorig/something/pr",
+          },
+          "repository" => {
+            "name" => "repo",
+            "owner" => {
+              "login" => "xuorig"
+            }
           },
           "comment" => {
             "body" => "@xuorig please review"
@@ -32,7 +38,7 @@ RSpec.describe CommentWebhookJob, :type => :job do
 
       it "adds a pull request to the reviewers" do
         expect do
-          described_class.new.perform(params["issue"], params["comment"])
+          described_class.new.perform(params)
         end.to change { user.reload.pull_requests.count }.by(1)
       end 
     end
@@ -41,9 +47,15 @@ RSpec.describe CommentWebhookJob, :type => :job do
       let(:params) {
         {
           "issue" => {
-            "id" => "123",
+            "number" => 123,
             "title" => "Great PR",
-            "url" => "http://github.com/xuorig/something/pr",
+            "html_url" => "http://github.com/xuorig/something/pr",
+          },
+          "repository" => {
+            "name" => "repo",
+            "owner" => {
+              "login" => "xuorig"
+            }
           },
           "comment" => {
             "body" => "@incognito please review"
@@ -65,7 +77,7 @@ RSpec.describe CommentWebhookJob, :type => :job do
       it "does not add any pr to the user" do
         count = user.pull_requests.count
         expect do
-          described_class.new.perform(params["issue"], params["comment"])
+          described_class.new.perform(params)
         end.not_to change { user.reload.pull_requests.count }.from(count)
       end 
     end

@@ -4,14 +4,6 @@ RSpec.describe PullRequestType, :type => :model do
   let(:pr) { build(:pull_request) }
   let(:resolved) { subject.resolve(pr, nil, nil) }
 
-  describe "github_id field" do
-    let(:subject) { PullRequestType.fields["github_id"] }
-
-    it "resolves to the pr github_id" do
-      expect(resolved).to eq(pr.github_id)
-    end
-  end
-
   describe "title field" do
     let(:subject) { PullRequestType.fields["title"] }
 
