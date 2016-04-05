@@ -10,6 +10,7 @@ class GraphqlController < ApplicationController
       context: { current_user: current_user },
       debug: true
     )
+    puts result
     render json: result
   end
 
