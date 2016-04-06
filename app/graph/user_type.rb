@@ -11,10 +11,14 @@ UserType = Graph::ActiveRecordObjectType.define do
 
     argument :first, types.Int
     argument :after, types.String
+    argument :status, ReviewsStatusEnum
 
     resolve -> (user, arguments, _) do
+      status = arguments["status"]
+      connection = status == "PENDING" ? user.reviews : user.reviewed
+
       Graph::Relay::Connection.new(
-        user.reviews,
+        connection,
         arguments,
         max_page_size: 50, 
       ) 
