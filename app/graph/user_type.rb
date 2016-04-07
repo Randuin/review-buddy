@@ -6,6 +6,7 @@ UserType = Graph::ActiveRecordObjectType.define do
 
   field :email, !types.String, property: :email
 
+  # TODO make connection field a thing
   field :reviews do
     type -> { PullRequestType.connection_type }
 

@@ -18,8 +18,9 @@ class User < ApplicationRecord
     user
   end
 
-  def update_auth_token
-    assign_attributes(auth_token: "#{self.id}:#{Devise.friendly_token}")
+  def update_auth_token!
+    self.auth_token = "#{self.id}:#{Devise.friendly_token}"
+    save!
   end
 
   def reviews

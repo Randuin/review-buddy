@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  describe "#update_auth_token" do
-    before do
-      subject.id = 14
-      subject.update_auth_token
-    end
+  describe "#update_auth_token!" do
+    let(:subject) { create(:user) }
 
     it "generates an auth token for user" do
-      expect(subject.auth_token).to match(/14:.+/)
+      subject.update_auth_token!
+      expect(subject.auth_token).to match(/d*:.+/)
     end
   end
 
@@ -19,7 +17,18 @@ RSpec.describe User, :type => :model do
     end
 
     it "returns all non-reviewed prs the user has been pinged on" do
-      expect(subject.reviews.size).to eq(1)
+      expect(subject.reviews).to all(have_attributes(reviewed: false))
+    end
+  end
+
+  describe "#reviewed" do
+    before do
+      subject.pull_requests << PullRequest.new(reviewed: true)
+      subject.pull_requests << PullRequest.new(reviewed: false)
+    end
+
+    it "returns all the reviews the user has done" do
+      expect(subject.reviews).to all(have_attributes(reviewed: false))
     end
   end
 

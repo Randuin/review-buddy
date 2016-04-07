@@ -6,8 +6,7 @@ RSpec.describe GraphqlController, type: :controller do
   describe "POST create" do
     let(:user) do
       user = create(:user)
-      user.update_auth_token
-      user.save!
+      user.update_auth_token!
       user
     end
 
