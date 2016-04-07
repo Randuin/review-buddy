@@ -5,8 +5,8 @@ QueryType = GraphQL::ObjectType.define do
   # The Viewer class is just a wrapper/workaround to have 
   # fields with arguments on the query root.
   field :viewer do
-    type ViewerType
-    resolve -> (_, _, _) { Class.new }
+    type UserType
+    resolve -> (_, _, ctx) { ctx[:current_user] }
   end
 
   # Relay Spec Requirement

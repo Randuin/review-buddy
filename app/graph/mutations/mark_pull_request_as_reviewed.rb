@@ -5,14 +5,13 @@ module Mutations
         def call(obj, args, ctx)
           pr = PullRequest.find(args["pullRequestId"])
           pr.update!(reviewed: true)
-          { reviewedReviewId: pr.to_global_id, currentUser: ctx[:current_user] }
+          { viewer: ctx[:current_user] }
         end
       end
     end
 
     input :pullRequestId, GraphQL::INT_TYPE
-    returns :reviewedReviewId, GraphQL::ID_TYPE
-    returns :currentUser, UserType
+    returns :viewer, UserType
     resolve_with Resolver
   end
 end
