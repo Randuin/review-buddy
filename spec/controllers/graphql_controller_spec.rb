@@ -24,4 +24,11 @@ RSpec.describe GraphqlController, type: :controller do
       })
     end
   end
+
+  describe "GET introspection" do
+    it 'returns the result of the INTROSPECTION_QUERY' do
+      get :introspection
+      expect(response.status).to eq(200)
+    end
+  end
 end

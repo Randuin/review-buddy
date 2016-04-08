@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :user
 
   resource :graphql, controller: 'graphql'
-  if Rails.env.development?
+  if Rails.env.development? || Rails.env.test?
     get '/graphql/introspection', to: 'graphql#introspection'
   end
 
