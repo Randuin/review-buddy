@@ -25,4 +25,12 @@ UserType = Graph::ActiveRecordObjectType.define do
       ) 
     end
   end
+
+  field :repos do
+    type types[RepoType]
+
+    resolve -> (user, _, _) do
+      user.repos
+    end
+  end
 end

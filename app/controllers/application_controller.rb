@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < ActionController::API
   def authenticate_user_from_token!
     auth_token = request.headers['Authorization']

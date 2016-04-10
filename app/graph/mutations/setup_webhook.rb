@@ -5,12 +5,21 @@ module Mutations
         return unless current_user = ctx[:current_user]
         repoName = args["repoName"]
 
-        response = current_user.client.setup_webhook(repoName)
-        raise StandardError, "Something went wrong" unless response.status == 200
+        comment_response = current_user.client.setup_webhook(
+          repoName,
+          ['issue_comment'], 
+          Rails.application.config.comment_webhook_url
+        )
 
-        webhook_params = JSON.parse(response.body) 
+        pr_response = current_user.client.setup_webhook(
+          repoName,
+          ['pull_request'], 
+          Rails.application.config.pr_webhook_url
+        )
+
+        webhook_params = JSON.parse(comment_response.body) 
         repo = current_user.repos.create!(
-          url: "https://github.com/#{current_user.github_username}/#{repoName}",
+          url: "https://github.com/#{repoName}",
           name: repoName,
           webhook_url: webhook_params["url"],
           webhook_id: webhook_params["id"]

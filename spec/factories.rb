@@ -21,6 +21,10 @@ FactoryGirl.define do
     github_username { 'xuorig' }
     password { 'password' }
     github_access_token { 'an_access_token' }
+
+    after(:build) do |user|
+      user.repos << Repo.new(name: 'test-repo')
+    end
     
     factory :user_with_prs do
       after(:build) do |user|

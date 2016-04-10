@@ -11,6 +11,17 @@ RSpec.describe UserType, :type => :model do
     end
   end
 
+  describe "repos field" do
+    let(:subject) { UserType.fields["repos"] }
+    let(:user) { build(:user) }
+    let(:resolved) { subject.resolve(user, nil, nil) }
+
+    it "resolves the pull requests not yet reviewed by user" do
+      expect(resolved.size).to eq(1)
+      expect(resolved[0].name).to eq('test-repo')
+    end
+  end
+
   describe "reviews connection" do
     let(:subject) { UserType.fields["reviews"] }
     let(:user) { build(:user_with_prs) }

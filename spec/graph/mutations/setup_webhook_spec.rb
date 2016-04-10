@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Mutations::SetupWebhook  do
     let(:query_string) {%|
     mutation setupWebhook {
-      setupWebhook(input: { repoName: "reviewbuddy", clientMutationId: "1234" }) {
+      setupWebhook(input: { repoName: "xuorig/reviewbuddy", clientMutationId: "1234" }) {
         clientMutationId
         repo {
           url
@@ -44,7 +44,7 @@ describe Mutations::SetupWebhook  do
           "clientMutationId" => "1234",
           "repo" => {
             "url" => "https://github.com/xuorig/reviewbuddy",
-            "name" => "reviewbuddy",
+            "name" => "xuorig/reviewbuddy",
             "webhook_url" => "test",
             "webhook_id" => "1",
           }

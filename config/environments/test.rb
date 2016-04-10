@@ -1,6 +1,8 @@
 Rails.application.configure do
+  config.comment_webhook_url = "#{ENV['REVIEW_BUDDY_URL']}/webhooks/comment"
+  config.pr_webhook_url = "#{ENV['REVIEW_BUDDY_URL']}/webhooks/pr"
+
   config.intent_service_url = 'http://localhost:5000'
-  config.webhook_url = 'http://localhost:3000/webhooks/comment'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's

@@ -13,11 +13,11 @@ class Github
     get('/user')
   end
 
-  def setup_webhook(repoName)
-    post("/repos/xuorig/#{repoName}/hooks", 
+  def setup_webhook(repoName, events, callback)
+    post("/repos/#{repoName}/hooks", 
       name: 'web',       
-      config: { url: Rails.application.config.webhook_url, content_type: 'json'}, 
-      events: ['commit_comment'], 
+      config: { url: callback, content_type: 'json'}, 
+      events: events, 
     )
   end
   
