@@ -9,18 +9,19 @@ class User < ApplicationRecord
 
   def self.from_github(access_token, user_data)
     user = User.find_or_initialize_by(github_uid: user_data["id"]) do |user|
-      user.email = user_data["email"] 
+      user.email = user_data["email"]
       user.password = Devise.friendly_token.first(8)
       user.github_access_token = access_token
     end
 
+    user.auth_token = "#{user.id}:#{Devise.friendly_token}"
     user.save!
     user
   end
 
   def update_auth_token!
     self.auth_token = "#{self.id}:#{Devise.friendly_token}"
-    save!
+    self.save!
   end
 
   def reviews

@@ -35,10 +35,9 @@ ActiveRecord::Schema.define(version: 20160404220310) do
     t.integer  "repo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["repo_id"], name: "index_repo_collaborations_on_repo_id", using: :btree
+    t.index ["user_id"], name: "index_repo_collaborations_on_user_id", using: :btree
   end
-
-  add_index "repo_collaborations", ["repo_id"], name: "index_repo_collaborations_on_repo_id", using: :btree
-  add_index "repo_collaborations", ["user_id"], name: "index_repo_collaborations_on_user_id", using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.integer  "github_id"
@@ -75,10 +74,9 @@ ActiveRecord::Schema.define(version: 20160404220310) do
     t.string   "github_access_token"
     t.string   "github_uid"
     t.string   "github_username"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "repo_collaborations", "repos"
   add_foreign_key "repo_collaborations", "users"

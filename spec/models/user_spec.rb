@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  describe "#update_auth_token!" do
-    let(:subject) { create(:user) }
-
-    it "generates an auth token for user" do
-      subject.update_auth_token!
-      expect(subject.auth_token).to match(/d*:.+/)
-    end
-  end
-
   describe "#reviews" do
     before do
       subject.pull_requests << PullRequest.new(reviewed: true)
@@ -37,7 +28,7 @@ RSpec.describe User, :type => :model do
     let(:github_uid) { "yabcde1234fegt" }
 
     let(:github_data) {
-      { 
+      {
         "email" => email,
         "avatar_url" => "https://cdn.swag.com/123asd",
         "id" => github_uid,
@@ -51,6 +42,7 @@ RSpec.describe User, :type => :model do
     }
 
     it "creates a new user from github data" do
+      expect(subject.auth_token).to match(/d*:.+/)
       expect(subject.email).to eq(email)
       expect(subject.github_uid).to eq(github_uid)
       expect(subject.github_access_token).to eq(access_token)
