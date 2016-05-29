@@ -5,9 +5,9 @@ class WebhooksController < ApplicationController
   end
 
   def pr
-    if request.request_parameters["action"] == 'closed'
-      ClosePullRequestJob.perform_later(pr_params.to_h)
-    end
+    # TODO: Change name to UpdatePullRequestJob
+    ClosePullRequestJob.perform_later(pr_params.to_h)
+
     head :ok
   end
 
@@ -43,6 +43,7 @@ class WebhooksController < ApplicationController
         }
       ],
       pull_request: [
+        :title,
         :merged
       ]
     )

@@ -5,6 +5,10 @@ module Mutations
         def call(obj, args, ctx)
           pr = PullRequest.find(args["pullRequestId"])
           pr.update!(reviewed: true)
+
+          ActionCable.server.broadcast 'pull_requests',
+            pull_request: pr
+
           { viewer: ctx[:current_user] }
         end
       end

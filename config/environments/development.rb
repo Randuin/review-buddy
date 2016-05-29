@@ -2,6 +2,7 @@ Rails.application.configure do
   config.intent_service_url = 'http://localhost:5000'
   config.comment_webhook_url = "#{ENV['REVIEW_BUDDY_URL']}/webhooks/comment"
   config.pr_webhook_url = "#{ENV['REVIEW_BUDDY_URL']}/webhooks/pr"
+  config.action_cable.allowed_request_origins = ['http://localhost:8080']
 
   config.cache_classes = false
 
